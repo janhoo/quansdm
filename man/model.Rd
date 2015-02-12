@@ -55,7 +55,7 @@ model(data, method, responsetype, response, predictors, secondary = NULL,
 A \code{model}, or a \code{data.frame} or a \code{list} depending on arguments
 }
 \description{
-Allocate an empthy data.frame from template dataframe
+make a species distribution model
 }
 \details{
 ysdgadghadfgh

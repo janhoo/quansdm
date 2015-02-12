@@ -1,6 +1,6 @@
 #' @title Make a species distribution model
 #' 
-#' @description Allocate an empthy data.frame from template dataframe
+#' @description make a species distribution model
 #' 
 #' @param data \code{SpatialPointsDataFrame} containing response and predictors
 #' @param method SDM methos used: "gam", "rf", "gbm", "max", or "gbm.step". See details for details
