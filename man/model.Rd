@@ -43,7 +43,7 @@ model(data, method, responsetype, response, predictors, secondary = NULL,
 
 \item{rast}{return \code{list} of metric and raster}
 
-\item{rast.occ}{additionally add bimodal occurence map. see details for threshold calculation.}
+\item{rast.occ}{additionally adds bimodal occurence map. see details for threshold calculation.}
 
 \item{flat}{return model performance metrics only (as \code{data.frame})}
 

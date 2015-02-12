@@ -20,7 +20,7 @@
 #' @param moran 
 #' @param flat return model performance metrics only (as \code{data.frame})
 #' @param rast return \code{list} of metric and raster
-#' @param rast.occ additionally add bimodal occurence map. see details for threshold calculation.
+#' @param rast.occ additionally adds bimodal occurence map. see details for threshold calculation.
 #' @param ...(ellipsis)  threshold.def
 #' @return A \code{model}, or a \code{data.frame} or a \code{list} depending on arguments
 #' @details ysdgadghadfgh
