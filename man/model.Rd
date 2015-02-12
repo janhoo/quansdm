@@ -15,39 +15,41 @@ model(data, method, responsetype, response, predictors, secondary = NULL,
 
 \item{method}{SDM methos used: "gam", "rf", "gbm", "max", or "gbm.step". See details for details}
 
-\item{responsetype}{Type of the response: "count", "continuous", or "presence". Presence denotes a bimodal response 0|1}
+\item{responsetype}{Type of the response: "count", "continuous", or "presence". Presence denotes bimodal responses [0|1]}
 
-\item{response}{}
+\item{response}{Column name of response in data argument}
 
-\item{predictors}{}
+\item{predictors}{Column names of predictors to use in data argument}
 
-\item{secondary}{}
+\item{secondary}{Column name in data. Use this to calculate model performance metrics from instead of response. Default is NULL.}
 
-\item{enviStack}{}
+\item{enviStack}{\code{RasterStack} of predictors. Used to calculate SD map}
 
-\item{enviPix}{}
+\item{enviPix}{\code{SpatialPixelsDataFrame} of predictors. enviPix<-as(enviStack,"SpatialPixelsDataFrame"). Only for performance.}
 
-\item{seed}{}
+\item{seed}{Integer. For reproduceability.}
 
-\item{aggregated}{}
+\item{aggregated}{logical or NULL. Default is NULL.}
 
-\item{pseudoabsence}{}
+\item{pseudoabsence}{logical or NULL. Default is NULL}
 
-\item{gbm.trees}{}
+\item{gbm.trees}{gbm.trees param for dismo::gbm}
 
-\item{maxargs}{}
+\item{maxargs}{argument to pass tp maxent}
 
-\item{model}{}
+\item{model}{return only the model. Overrides args below}
 
-\item{prediction}{}
+\item{prediction}{return only the prediction. Overrides args below}
 
-\item{rast.occ}{}
+\item{rast}{return \code{list} of metric and raster}
 
-\item{flat}{}
+\item{rast.occ}{additionally add bimodal occurence map. see details for threshold calculation.}
+
+\item{flat}{return model performance metrics only (as \code{data.frame})}
 
 \item{moran}{}
 
-\item{...(ellipsis)}{}
+\item{...(ellipsis)}{threshold.def}
 }
 \value{
 A \code{model}, or a \code{data.frame} or a \code{list} depending on arguments
