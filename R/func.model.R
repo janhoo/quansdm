@@ -11,20 +11,21 @@
 #' @param enviStack \code{RasterStack} of predictors. Used to calculate SD map
 #' @param enviPix \code{SpatialPixelsDataFrame} of predictors. enviPix<-as(enviStack,"SpatialPixelsDataFrame"). Only for performance.
 #' @param seed Integer. For reproduceability.
-#' @param aggregated logical or NULL. Default is NULL. 
-#' @param pseudoabsence logical or NULL. Default is NULL
+#' @param aggregated logical or \code{NULL} Default is  \code{NULL}. This is for ensemble calculations and added to metrics in case of not being \code{NULL}
+#' @param pseudoabsence logical or \code{NULL} Default is \code{NULL}. Same as above
 #' @param gbm.trees gbm.trees param for dismo::gbm
 #' @param maxargs argument to pass tp maxent
-#' @param model return only the model. Overrides args below
-#' @param prediction return only the prediction. Overrides args below
-#' @param moran 
+#' @param model \code{logical} return ONLY the model. Default is \code{FALSE}. Overrides args below.
+#' @param prediction return ONLY the prediction. Default is \code{FALSE}. Overrides args below.
+#' @param moran add spatial autocorrelation metric to model metric. Default is \code{FALSE}. See details.
 #' @param flat return model performance metrics only (as \code{data.frame})
 #' @param rast return \code{list} of metric and raster
 #' @param rast.occ additionally adds bimodal occurence map. see details for threshold calculation.
-#' @param ...(ellipsis)  threshold.def
+#' @param ... ellipsis is used to pass arguments to subsequent functions like  \code{threshold.def} and \code{moRange}. See \code{\link{metrics}} \code{\link{moranii}} for details
 #' @return A \code{model}, or a \code{data.frame} or a \code{list} depending on arguments
-#' @details ysdgadghadfgh
-#' @examples Notyet
+#' @details SDM methos used are "gam", "rf", "gbm", "max", or "gbm.step".
+#' If you want spatial autocorrelation metrics you probably need to pass additional arguments to \code{\link{moranii}}. Note that calculations may take very long depending on number of points and parametrization #FIXME
+#' @examples #FIXME
 #' 
 
 model <- function(data, 
@@ -42,10 +43,10 @@ model <- function(data,
 				  maxargs=c("outputformat=logistic", "defaultprevalence=0.5"),
 				  model=FALSE,
 				  prediction=FALSE,
+				  flat=FALSE,
+				  moran=FALSE,
                   rast=TRUE,
 				  rast.occ=TRUE,
-                  flat=FALSE,
-                  moran=FALSE,
                   ...)
 {
 	# Metrics and prediction map of Species Distribution Model specified as list
@@ -128,6 +129,9 @@ model <- function(data,
 #                                     
 # crossvalid :: cross validation routine 
 #
+#' @title Cross validation routine for species distribution models
+#' 
+#' @description run cross-validation
 crossvalid <- function(Ncv, 
                        Kfold, 
                        data, 
@@ -331,7 +335,6 @@ moranii <- function(sp,moParams=c("response","residuals"),moRange=list(c(0,0.5),
 	p.adj.method="holm"
 	spcor<-function(){
 		m <- sp.correlogram(nb, as.vector(sp[[P]]), order=2, method="I", zero.policy=TRUE)
-		
 		res <- as.matrix(m$res)
 		ZI <- (res[, 1] - res[, 2])/sqrt(res[, 3])
 		pv <- p.adjust(2 * pnorm(abs(ZI), lower.tail = FALSE), method = p.adj.method)			

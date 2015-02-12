@@ -7,8 +7,8 @@ model(data, method, responsetype, response, predictors, secondary = NULL,
   enviStack, enviPix, seed = NULL, aggregated = NULL,
   pseudoabsence = NULL, gbm.trees = 2000,
   maxargs = c("outputformat=logistic", "defaultprevalence=0.5"),
-  model = FALSE, prediction = FALSE, rast = TRUE, rast.occ = TRUE,
-  flat = FALSE, moran = FALSE, ...)
+  model = FALSE, prediction = FALSE, flat = FALSE, moran = FALSE,
+  rast = TRUE, rast.occ = TRUE, ...)
 }
 \arguments{
 \item{data}{\code{SpatialPointsDataFrame} containing response and predictors}
@@ -29,27 +29,27 @@ model(data, method, responsetype, response, predictors, secondary = NULL,
 
 \item{seed}{Integer. For reproduceability.}
 
-\item{aggregated}{logical or NULL. Default is NULL.}
+\item{aggregated}{logical or \code{NULL} Default is  \code{NULL}. This is for ensemble calculations and added to metrics in case of not being \code{NULL}}
 
-\item{pseudoabsence}{logical or NULL. Default is NULL}
+\item{pseudoabsence}{logical or \code{NULL} Default is \code{NULL}. Same as above}
 
 \item{gbm.trees}{gbm.trees param for dismo::gbm}
 
 \item{maxargs}{argument to pass tp maxent}
 
-\item{model}{return only the model. Overrides args below}
+\item{model}{\code{logical} return ONLY the model. Default is \code{FALSE}. Overrides args below.}
 
-\item{prediction}{return only the prediction. Overrides args below}
+\item{prediction}{return ONLY the prediction. Default is \code{FALSE}. Overrides args below.}
+
+\item{flat}{return model performance metrics only (as \code{data.frame})}
+
+\item{moran}{add spatial autocorrelation metric to model metric. Default is \code{FALSE}. See details.}
 
 \item{rast}{return \code{list} of metric and raster}
 
 \item{rast.occ}{additionally adds bimodal occurence map. see details for threshold calculation.}
 
-\item{flat}{return model performance metrics only (as \code{data.frame})}
-
-\item{moran}{}
-
-\item{...(ellipsis)}{threshold.def}
+\item{...}{ellipsis is used to pass arguments to subsequent functions like  \code{threshold.def} and \code{moRange}. See \code{\link{metrics}} \code{\link{moranii}} for details}
 }
 \value{
 A \code{model}, or a \code{data.frame} or a \code{list} depending on arguments
@@ -58,9 +58,10 @@ A \code{model}, or a \code{data.frame} or a \code{list} depending on arguments
 make a species distribution model
 }
 \details{
-ysdgadghadfgh
+SDM methos used are "gam", "rf", "gbm", "max", or "gbm.step".
+If you want spatial autocorrelation metrics you probably need to pass additional arguments to \code{\link{moranii}}. Note that calculations may take very long depending on number of points and parametrization #FIXME
 }
 \examples{
-Notyet
+#FIXME
 }
 
