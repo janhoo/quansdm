@@ -1,9 +1,9 @@
 Package: quansdm
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: quantitative species distribution modelling
+Version: 0.0.1
 Date: 2015-02-11
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Jan M Holstein
+Maintainer: Jan M Holstein<janmholstein@gmail.com>
+Description: modelling framework for quantitative species distribution modelling with helper functions for cross validation, null models and whatnot
+License: GNU Affero GPL (>= v3.0)

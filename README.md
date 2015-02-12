@@ -12,7 +12,7 @@ This R package contains functions that allows to "species-distribution-model" co
 ### Installation
 just issue
 ```
-devtools::install_github("quansdm", "janhoo")
+devtools::install_github("janhoo/quansdm")
 ```
 you may need to (`install.packages("devtools")`) first.
 
