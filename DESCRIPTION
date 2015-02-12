@@ -1,9 +1,23 @@
 Package: quansdm
 Type: Package
-Title: quantitative species distribution modelling
 Version: 0.0.1
-Date: 2015-02-11
+Title: quantitative species distribution modelling
+Description: modelling framework for quantitative species distribution modelling with helper functions for cross validation, null models and whatnot
 Author: Jan M Holstein
 Maintainer: Jan M Holstein<janmholstein@gmail.com>
-Description: modelling framework for quantitative species distribution modelling with helper functions for cross validation, null models and whatnot
+Authors@R: c(
+    person("Jan", "Holstein","M" , "janmholstein@gmail.com", c("aut", "cre", "cph"))
+    )
+Depends:
+	sp,
+	rgdal,
+	gdata,
+	spdep,
+	raster,
+	mgcv,
+	randomForest,
+	dismo,
+	gbm,
+Suggests:
+	rJava
 License: GNU Affero GPL (>= v3.0)

@@ -3,8 +3,17 @@
 \name{quansdm}
 \alias{quansdm}
 \alias{quansdm-package}
-\title{quansdm}
+\title{quansdm: quantitative species distribution modelling framework}
 \description{
-Generate R documentation from inline comments.
+quansdm provides wrapper functions for some popular species distribution modelling methods.
+}
+\details{
+It has three main goals:
+\itemize{
+\item Free you from tedious tasks.
+\item Provide a large variety of model performance metrics.
+\item Provide model validation techniques like cross-validation, null-models,
+and  exploration of spatial autocorrelation.
+}
 }
 
