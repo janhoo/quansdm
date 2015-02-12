@@ -9,7 +9,18 @@ crossvalid(Ncv, Kfold, data, method, responsetype, response, predictors,
   maxargs = c("outputformat=logistic", "defaultprevalence=0.5"),
   rast = TRUE, flat = FALSE, ...)
 }
+\arguments{
+\item{Ncv}{Number of cv repititions.}
+
+\item{Kfold}{Number of folds. Usually take 10 or 5.}
+
+\item{rast}{return \code{list} of metric and raster}
+
+\item{flat}{return model performance metrics only (as \code{data.frame})}
+
+\item{...}{ellipsis is used to pass arguments to subsequent functions like  \code{threshold.def}. See \code{\link{metrics}} for details}
+}
 \description{
-run cross-validation
+repeated k-fold cross-validation. Calculate model preformance metrics, disribution, standard deviation and occurence maps.
 }
 

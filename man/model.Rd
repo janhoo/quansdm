@@ -55,7 +55,7 @@ model(data, method, responsetype, response, predictors, secondary = NULL,
 A \code{model}, or a \code{data.frame} or a \code{list} depending on arguments
 }
 \description{
-make a species distribution model
+Returns the model, the performance metrics, and/or distribution maps depending on arguments.
 }
 \details{
 SDM methos used are "gam", "rf", "gbm", "max", or "gbm.step".
