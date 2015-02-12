@@ -1,6 +1,6 @@
 #' @title Make a species distribution model
 #' 
-#' @description make a species distribution model
+#' @description Returns the model, the performance metrics, and/or distribution maps depending on arguments.
 #' 
 #' @param data \code{SpatialPointsDataFrame} containing response and predictors
 #' @param method SDM methos used: "gam", "rf", "gbm", "max", or "gbm.step". See details for details
@@ -131,7 +131,16 @@ model <- function(data,
 #
 #' @title Cross validation routine for species distribution models
 #' 
-#' @description run cross-validation
+#' @description repeated k-fold cross-validation. Calculate model preformance metrics, disribution, standard deviation and occurence maps.
+#' 
+#' @param Ncv Number of cv repititions.
+#' @param Kfold Number of folds. Usually take 10 or 5.
+#' @param flat return model performance metrics only (as \code{data.frame})
+#' @param rast return \code{list} of metric and raster
+#' @param ... ellipsis is used to pass arguments to subsequent functions like  \code{threshold.def}. See \code{\link{metrics}} for details
+
+
+#
 crossvalid <- function(Ncv, 
                        Kfold, 
                        data, 
@@ -207,7 +216,7 @@ crossvalid <- function(Ncv,
 			if(!is.null(secondary)){
 				sec <- data[[secondary]][group == k]
 			}
-			M<-metrics(response=test[[response]],prediction=P,secondary=sec)
+			M<-metrics(response=test[[response]],prediction=P,secondary=sec, ...)
 			metric<-data.frame(list(
 				as.list(c(response=response,method=method,responsetype=responsetype,predictors=paste0(predictors,collapse="."))),
 				as.list(c(aggregated=ifelse(class(aggregated)=="logical",aggregated,FALSE),pseudoabsence=ifelse(class(pseudoabsence)=="logical",pseudoabsence,FALSE))),
