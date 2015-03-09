@@ -1,6 +1,8 @@
 # QuanSDM
 ## quantitative species distribution modelling
 
+### This packeg is deprecated. Use [crecs](https://github.com/janhoo/crecs) instead.
+
 
 This R package contains functions that allows to "species-distribution-model" continious quantities for few SDM methods, such as 
 [random forest](http://cran.r-project.org/web/packages/randomForest/index.html),
