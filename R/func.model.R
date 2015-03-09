@@ -135,6 +135,20 @@ model <- function(data,
 #' 
 #' @param Ncv Number of cv repititions.
 #' @param Kfold Number of folds. Usually take 10 or 5.
+#' @param data \code{SpatialPointsDataFrame} containing response and predictors
+#' @param method SDM methos used: "gam", "rf", "gbm", "max", or "gbm.step". See details for details
+#' @param responsetype Type of the response: "count", "continuous", or "presence". Presence denotes bimodal responses [0|1]
+#' @param response Column name of response in data argument
+#' @param predictors Column names of predictors to use in data argument
+#' @param secondary Column name in data. Use this to calculate model performance metrics from instead of response. Default is NULL.
+#' @param strata criterion for gereation of folds
+#' @param enviStack \code{RasterStack} of predictors. Used to calculate SD map
+#' @param enviPix \code{SpatialPixelsDataFrame} of predictors. enviPix<-as(enviStack,"SpatialPixelsDataFrame"). Only for performance.
+#' @param seed Integer. You probably want reproduceability. Note that Maxent's pseudoabsence generation can't be seeded this way--so expect those results to vary
+#' @param aggregated logical or \code{NULL} Default is  \code{NULL}. This is for ensemble calculations and added to metrics in case of not being \code{NULL}
+#' @param pseudoabsence logical or \code{NULL} Default is \code{NULL}. Same as above
+#' @param gbm.trees gbm.trees param for dismo::gbm
+#' @param maxargs argument to pass tp maxent
 #' @param flat return model performance metrics only (as \code{data.frame})
 #' @param rast return \code{list} of metric and raster
 #' @param ... ellipsis is used to pass arguments to subsequent functions like  \code{threshold.def}. See \code{\link{metrics}} for details
@@ -190,7 +204,11 @@ crossvalid <- function(Ncv,
 	}
 	if(is.null(strata)){
 		strata<-"presence"
-		data$presence<-presence.absence(data[[response]])
+		if("presence" %in% names(data)){
+			stop("presence exists in data - use strata=\"presence\"")
+		} else {
+			data$presence<-presence.absence(data[[response]])
+		}
 	}
 	if(rast){
 		rbin<-raster(enviStack,layer=1)*0
